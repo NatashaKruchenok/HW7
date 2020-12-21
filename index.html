@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .small {
+        display: flex;
+        padding: 0;
+    }
+
+    .small > li {
+        list-style: none;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+    .small img {
+        max-height: 200px;
+        width: auto;
+    }
+    .big img {
+        max-width: 500px;
+        height: auto;
+    }
+</style>
+<body>
+    <ul class="small">
+    </ul>
+    <div class="big">
+    </div>
+    <script>
+        const imgContainerSmall = document.querySelector('.small');
+        const imageContainerBig = document.querySelector('.big');
+
+        const pictures = [
+            {title: 'Борис', description: 'Ленивый кот', link: '1.jpg'},
+            {title: 'Федя', description: 'Толстый кот', link: '2.jpg'},
+            {title: 'Василий', description: 'Просто кот', link: '3.jpg'},
+        ]
+
+        for(i = 0; i < pictures.length; i++) {
+            let item = document.createElement('li');
+            imgContainerSmall.append(item);
+            item.innerHTML = '';
+        }
+
+        document.querySelectorAll('.small > li').forEach( (elem, index) => {
+            let img = document.createElement('img');
+            img.src = `./${pictures[index].link}`;
+            let picTitle = document.createElement('h3');
+            picTitle.innerHTML = pictures[index].title;
+            elem.append(img);
+            elem.append(picTitle);
+
+            elem.addEventListener('click', function () {
+                    let img = document.createElement('img');
+                    let description = document.createElement('p');
+                    img.src = `./${pictures[index].link}`;
+                    description.innerHTML = pictures[index].description;
+                    imageContainerBig.innerHTML = '';
+                    imageContainerBig.append(img);
+                    imageContainerBig.append(description);
+
+                })
+        });
+
+        imageContainerBig.addEventListener('click', function (event) {            
+            if ( event.target.nodeName=== 'IMG') {
+                imageContainerBig.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>
